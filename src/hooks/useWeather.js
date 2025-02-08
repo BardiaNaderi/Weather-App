@@ -12,9 +12,11 @@ export const useWeather = (city) => {
   useEffect(() => {
     if (!city) return;
 
+    setForecast(null);
+    setShowForecast(false);
+
     const fetchCurrentWeather = async () => {
       setLoading(true);
-      setShowForecast(false);
       try {
         const data = await weatherApi.getCurrentWeather(city.id);
         setCurrentWeather(data);

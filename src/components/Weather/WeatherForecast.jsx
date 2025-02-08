@@ -1,8 +1,17 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { formatTemperature, formatDate, toProperCase } from '../../utils/formatters';
 import { getWeatherIcon } from '../../utils/weatherIconMapper';
+import { useState, useMemo } from 'react';
+import { ForecastDayExpanded } from './ForecastDayExpanded';
+import { groupForecastsByDay } from '../../utils/weatherUtils';
 
 export function WeatherForecast({ forecast }) {
+  const [expandedDay, setExpandedDay] = useState(null);
+  const groupedForecast = useMemo(() => 
+    groupForecastsByDay(forecast.list),
+    [forecast.list]
+  );
+
   if (!forecast) return null;
 
   const container = {
@@ -34,42 +43,54 @@ export function WeatherForecast({ forecast }) {
       >
         5-Day Forecast
       </motion.h3>
-      <motion.div 
-        className="forecast-list"
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
-        {forecast.list
-          .filter((item, index) => index % 8 === 0)
-          .map((item, index) => (
-            <motion.div 
-              key={index} 
-              className="forecast-item"
-              variants={item}
-              transition={{ duration: 0.5 }}
-            >
-              <p className="forecast-date">{formatDate(item.dt)}</p>
-              <motion.img 
-                src={getWeatherIcon(item.weather[0].icon)}
-                alt={item.weather[0].description}
-                className="weather-icon"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                  delay: 0.2 
-                }}
-              />
-              <p className="forecast-temp">{formatTemperature(item.main.temp)}</p>
-              <p className="forecast-desc">
-                {toProperCase(item.weather[0].description)}
-              </p>
-            </motion.div>
-          ))}
-      </motion.div>
+      
+      <AnimatePresence mode="wait">
+        {expandedDay ? (
+          <ForecastDayExpanded 
+            day={groupedForecast[expandedDay].dayData}
+            hourlyData={groupedForecast[expandedDay].hourlyData}
+            onReturn={() => setExpandedDay(null)}
+          />
+        ) : (
+          <motion.div 
+            className="forecast-list"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {Object.entries(groupedForecast).map(([date, data], index) => (
+              <motion.div 
+                key={date}
+                className="forecast-item"
+                onClick={() => setExpandedDay(date)}
+                whileHover={{ scale: 1.02 }}
+              >
+                <p className="forecast-date">{formatDate(data.dayData.dt)}</p>
+                <motion.img 
+                  src={getWeatherIcon(data.dayData.weather[0].icon)}
+                  alt={data.dayData.weather[0].description}
+                  className="weather-icon"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    delay: 0.2 
+                  }}
+                />
+                <div className="forecast-temps">
+                  <span className="temp-high">H: {formatTemperature(data.dayData.main.temp_max)}</span>
+                  <span className="temp-low">L: {formatTemperature(data.dayData.main.temp_min)}</span>
+                </div>
+                <p className="forecast-desc">
+                  {toProperCase(data.dayData.weather[0].description)}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 } 

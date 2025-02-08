@@ -1,11 +1,21 @@
+import { useCallback } from 'react';
+import debounce from 'lodash/debounce';
+
 function CitySelector({ cities, selectedCity, onSelectCity }) {
+  const debouncedSelectCity = useCallback(
+    debounce((city) => {
+      onSelectCity(city);
+    }, 300),
+    [onSelectCity]
+  );
+
   return (
     <div className="city-selector">
       <select 
         value={selectedCity?.id || ''}
         onChange={(e) => {
           const city = cities.find(c => c.id === Number(e.target.value));
-          onSelectCity(city);
+          debouncedSelectCity(city);
         }}
       >
         <option value="">Select a city</option>
