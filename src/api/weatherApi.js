@@ -1,11 +1,7 @@
-import { API_KEY, BASE_URL, UNITS } from '../constants/config';
-
 export const weatherApi = {
     async getCurrentWeather(cityId) {
       try {
-        const response = await fetch(
-          `${BASE_URL}/weather?id=${cityId}&appid=${API_KEY}&units=${UNITS}`
-        );
+        const response = await fetch(`/api/weather?id=${cityId}`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || 'Failed to fetch weather data');
@@ -19,14 +15,12 @@ export const weatherApi = {
   
     async getForecast(cityId) {
       try {
-        const response = await fetch(
-          `${BASE_URL}/forecast?id=${cityId}&appid=${API_KEY}&units=${UNITS}`
-        );
+        const response = await fetch(`/api/forecast?id=${cityId}`);
         if (!response.ok) throw new Error('Forecast data fetch failed');
         return await response.json();
       } catch (error) {
         console.error('Error fetching forecast:', error);
-        throw error;
+        throw new Error(`Forecast data fetch failed: ${error.message}`);
       }
     }
   };
