@@ -87,7 +87,7 @@
 }
 
 .temp-feels {
-  color: #a0a0a0;
+  color: #e0e0e0;
   font-size: 1rem;
 }
 
@@ -105,11 +105,12 @@
 
 .forecast-item {
   background: rgba(26, 26, 46, 0.8);
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   text-align: center;
   transition: transform 0.3s ease;
+  min-width: 140px;
 }
 
 .forecast-item:hover {
@@ -130,7 +131,8 @@
 }
 
 .forecast-desc {
-  color: #a0a0a0;
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   font-size: 0.9rem;
 }
 
@@ -172,4 +174,104 @@ button:active {
   background: rgba(255, 0, 0, 0.1);
   border-radius: 8px;
   margin: 1rem 0;
+}
+
+/* Add these new styles */
+.weather-description {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.temp-range {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+.weather-details-expanded {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.forecast-day-expanded {
+  padding: 1rem;
+}
+
+.expanded-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.hourly-forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hourly-forecast-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hourly-forecast-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hourly-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.hourly-forecast-item .hour {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.hourly-forecast-item .temp {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Update forecast temperatures styling */
+.forecast-temps {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.temp-high {
+  color: #ff7e67;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.temp-low {
+  color: #67b7ff;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Update expanded details text color */
+.weather-details-expanded p {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
 }
