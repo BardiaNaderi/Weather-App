@@ -39,7 +39,7 @@ npm run dev
 Create a `.env` file in the root directory and add your API key:
 ```
 VITE_WEATHER_API_KEY=your_api_key_here
-VITE_WEATHER_BASE_URL=http://api.openweathermap.org/data/2.5
+VITE_WEATHER_BASE_URL=https://api.openweathermap.org/data/2.5
 VITE_WEATHER_UNITS=metric 
 ```
 
