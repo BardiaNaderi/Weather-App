@@ -2,19 +2,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { WeatherDetails } from './WeatherDetails';
 import { WeatherForecast } from './WeatherForecast';
 import { useWeather } from '../../hooks/useWeather';
-import { LoadingSpinner } from '../common/LoadingSpinner';
+import { slideUp } from '../../constants/animations';
+import { useMemo } from 'react';
 
 function WeatherCard({ city }) {
   const {
     currentWeather,
     forecast,
     showForecast,
-    loading,
     error,
     fetchForecast
   } = useWeather(city);
 
-  if (loading) return <LoadingSpinner />;
+  const todayHourlyForecast = useMemo(() => {
+    if (!forecast) return null;
+    const today = new Date().toDateString();
+    return forecast.list.filter(item => 
+      new Date(item.dt * 1000).toDateString() === today
+    );
+  }, [forecast]);
+
   if (error) return <div className="error-message">{error}</div>;
   if (!currentWeather) return null;
 
@@ -22,13 +29,13 @@ function WeatherCard({ city }) {
     <motion.div 
       className="weather-card"
       key={city.id}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
+      {...slideUp}
     >
       <h2>{city.name}</h2>
-      <WeatherDetails weather={currentWeather} />
+      <WeatherDetails 
+        weather={currentWeather} 
+        hourlyForecast={todayHourlyForecast}
+      />
       
       <motion.div
         animate={{ height: showForecast ? "auto" : "50px" }}

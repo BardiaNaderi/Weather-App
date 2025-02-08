@@ -20,24 +20,31 @@
   padding: 12px 24px;
   font-size: 16px;
   width: 250px;
-  border: 2px solid #2a2a3c;
-  border-radius: 12px;
-  background-color: #1a1a2e;
-  color: #ffffff;
+  border: 2px solid var(--background-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--background-dark);
+  color: var(--text-light);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .city-selector select:hover {
-  border-color: #3498db;
+  border-color: var(--primary-color);
+}
+
+.card-base {
+  background: rgba(26, 26, 46, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .weather-card {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  border-radius: 20px;
-  padding: 30px;
+  background: rgba(26, 26, 46, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .weather-card h2, .weather-card h3 {
@@ -51,6 +58,12 @@
   text-align: center;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .weather-main {
   display: flex;
   align-items: center;
@@ -60,18 +73,18 @@
 }
 
 .weather-icon {
-  width: 50px;  /* Default size for forecast icons */
+  width: 50px;
   height: 50px;
   object-fit: contain;
 }
 
 .weather-icon.current {
-  width: 120px;  /* Bigger size for current weather icon */
+  width: 120px;
   height: 120px;
 }
 
 .forecast-item .weather-icon {
-  width: 50px;  /* Smaller size for forecast items */
+  width: 50px;
   height: 50px;
 }
 
@@ -93,7 +106,7 @@
 
 .weather-details {
   text-align: center;
-  color: #e1e1e1;
+  color: var(--text-light);
 }
 
 .forecast-list {
@@ -109,7 +122,7 @@
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-speed) ease;
   min-width: 140px;
 }
 
@@ -137,33 +150,32 @@
 }
 
 button {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--text-light);
   border: none;
   padding: 12px 24px;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   display: block;
   margin: 0 auto;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 5px 15px rgba(var(--primary-color), 0.3);
 }
 
 button:active {
   transform: translateY(0);
 }
 
-/* Error Styles */
 .error-boundary {
   text-align: center;
   padding: 2rem;
   background: rgba(255, 0, 0, 0.1);
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   margin: 1rem 0;
 }
 
@@ -176,7 +188,6 @@ button:active {
   margin: 1rem 0;
 }
 
-/* Add these new styles */
 .weather-description {
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -208,12 +219,31 @@ button:active {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .hourly-forecast-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  padding: 1rem;
+}
+
+.hourly-forecast-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.hourly-forecast-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
@@ -228,15 +258,6 @@ button:active {
   }
 }
 
-.hourly-forecast-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-}
-
 .hourly-forecast-item .hour {
   color: #ffffff;
   font-weight: 500;
@@ -247,7 +268,6 @@ button:active {
   font-weight: 600;
 }
 
-/* Update forecast temperatures styling */
 .forecast-temps {
   display: flex;
   justify-content: center;
@@ -269,9 +289,20 @@ button:active {
   font-size: 0.85rem;
 }
 
-/* Update expanded details text color */
 .weather-details-expanded p {
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin: 0.5rem 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.button-group button {
+  flex: 1;
+  max-width: 200px;
 }

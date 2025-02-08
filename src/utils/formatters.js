@@ -1,7 +1,6 @@
 export const toProperCase = (str) => {
-  return str.split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
+  if (!str) return '';
+  return str.toLowerCase().replace(/(^|\s)\w/g, letter => letter.toUpperCase());
 };
 
 export const formatTemperature = (temp) => `${Math.round(temp)}°C`;

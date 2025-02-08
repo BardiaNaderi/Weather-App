@@ -1,13 +1,16 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { formatTemperature, formatDate, toProperCase } from '../../utils/formatters';
 import { getWeatherIcon } from '../../utils/weatherIconMapper';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { ForecastDayExpanded } from './ForecastDayExpanded';
 import { groupForecastsByDay } from '../../utils/weatherUtils';
 
 export function WeatherForecast({ forecast }) {
   const [expandedDay, setExpandedDay] = useState(null);
-  const groupedForecast = groupForecastsByDay(forecast.list);
+  const groupedForecast = useMemo(() => 
+    groupForecastsByDay(forecast.list),
+    [forecast.list]
+  );
 
   if (!forecast) return null;
 

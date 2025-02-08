@@ -4,7 +4,6 @@ export const groupForecastsByDay = (forecastList) => {
   
   forecastList.forEach(item => {
     const date = new Date(item.dt * 1000).toDateString();
-    // Skip today's forecast as it's shown separately
     if (date === today) return;
     
     if (!grouped[date]) {
@@ -24,7 +23,6 @@ export const groupForecastsByDay = (forecastList) => {
     
     grouped[date].hourlyData.push(item);
     
-    // Update max/min temperatures
     grouped[date].dayData.main.temp_max = Math.max(
       grouped[date].dayData.main.temp_max,
       item.main.temp_max
