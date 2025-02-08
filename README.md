@@ -1,6 +1,6 @@
 # Weather App
 
-A modern weather application built with React and Vite that provides real-time weather information. Check it out [here](weather-app-intercap.vercel.app)!
+A modern weather application built with React and Vite that provides real-time weather information. Check it out [here](https://weather-app-intercap.vercel.app)!
 
 <img width="1512" alt="Screenshot 2025-02-08 at 4 20 49 PM" src="https://github.com/user-attachments/assets/2410add8-0d4b-4d28-87b3-9b08b141f743" />
 
