@@ -4,6 +4,14 @@ import { formatTemperature, toProperCase, formatHour } from '../../utils/formatt
 import { getWeatherIcon } from '../../utils/weatherIconMapper';
 import { fadeIn, slideUp, scaleIn } from '../../constants/animations';
 
+/**
+ * Displays current weather information with expandable details and hourly forecast
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.weather - Current weather data
+ * @param {Array<Object>} [props.hourlyForecast] - Optional hourly forecast data
+ * @returns {JSX.Element} Weather details component
+ */
 export function WeatherDetails({ weather, hourlyForecast }) {
   const [showDetails, setShowDetails] = useState(false);
   const [showHourly, setShowHourly] = useState(false);

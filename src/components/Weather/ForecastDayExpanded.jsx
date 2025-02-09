@@ -2,6 +2,15 @@ import { motion } from 'framer-motion';
 import { formatHour, formatTemperature, formatDate } from '../../utils/formatters';
 import { getWeatherIcon } from '../../utils/weatherIconMapper';
 
+/**
+ * Displays detailed hourly forecast for a specific day
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.day - Weather data for the selected day
+ * @param {Array<Object>} props.hourlyData - Array of hourly weather forecasts
+ * @param {Function} props.onReturn - Callback function to return to main forecast view
+ * @returns {JSX.Element} Expanded day forecast component
+ */
 export function ForecastDayExpanded({ day, hourlyData, onReturn }) {
   return (
     <motion.div 

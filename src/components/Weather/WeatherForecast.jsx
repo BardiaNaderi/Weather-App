@@ -5,6 +5,13 @@ import { useState, useMemo } from 'react';
 import { ForecastDayExpanded } from './ForecastDayExpanded';
 import { groupForecastsByDay } from '../../utils/weatherUtils';
 
+/**
+ * Displays a 5-day weather forecast with expandable daily details
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.forecast - Forecast weather data
+ * @returns {JSX.Element} Weather forecast component
+ */
 export function WeatherForecast({ forecast }) {
   const [expandedDay, setExpandedDay] = useState(null);
   const groupedForecast = useMemo(() => 

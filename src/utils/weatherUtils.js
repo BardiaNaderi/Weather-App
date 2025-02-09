@@ -1,3 +1,9 @@
+/**
+ * Groups forecast data by day, excluding today
+ * Calculates daily high and low temperatures
+ * @param {Array} forecastList - List of hourly forecasts
+ * @returns {Object} Grouped forecast data by date
+ */
 export const groupForecastsByDay = (forecastList) => {
   const today = new Date().toDateString();
   const grouped = {};
