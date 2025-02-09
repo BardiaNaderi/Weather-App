@@ -100,6 +100,12 @@ const ICON_MAPPINGS = {
   }
 };
 
+/**
+ * Maps weather codes and descriptions to corresponding weather icons
+ * @param {string} code - Weather condition code from API
+ * @param {string} description - Weather condition description
+ * @returns {string} Path to the corresponding weather icon
+ */
 export const getWeatherIcon = (code, description = '') => {
   const lowerDescription = description.toLowerCase();
   const weatherCode = code.slice(0, 2);

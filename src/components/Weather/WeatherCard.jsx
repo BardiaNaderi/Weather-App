@@ -5,6 +5,21 @@ import { useWeather } from '../../hooks/useWeather';
 import { slideUp } from '../../constants/animations';
 import { useMemo } from 'react';
 
+// Possible Improvements: UX & Security Improvements
+// - Add loading states
+// - Implement proper error boundaries
+// - Add input sanitization
+// - Add proper TypeScript types
+// - Add accessibility attributes
+// - Add proper prop validation
+// - Implement memoization for expensive calculations
+
+/**
+ * Weather card component for displaying weather information
+ * @param {Object} props - Component props
+ * @param {Object} props.city - City object containing id and name
+ * @returns {JSX.Element} Weather card component
+ */
 function WeatherCard({ city }) {
   const {
     currentWeather,

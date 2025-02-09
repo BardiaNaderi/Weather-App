@@ -1,11 +1,18 @@
-import { API_KEY, BASE_URL, UNITS } from '../constants/config';
-
+/**
+ * Weather API interface for making requests to the server
+ * @namespace weatherApi
+ */
 export const weatherApi = {
+    /**
+     * Fetches current weather data for a specific city
+     * @async
+     * @param {number} cityId - The ID of the city to fetch weather for
+     * @returns {Promise<Object>} The current weather data
+     * @throws {Error} If the API request fails
+     */
     async getCurrentWeather(cityId) {
       try {
-        const response = await fetch(
-          `${BASE_URL}/weather?id=${cityId}&appid=${API_KEY}&units=${UNITS}`
-        );
+        const response = await fetch(`/api/cities/${cityId}/weather`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || 'Failed to fetch weather data');
@@ -17,16 +24,21 @@ export const weatherApi = {
       }
     },
   
+    /**
+     * Fetches forecast data for a specific city
+     * @async
+     * @param {number} cityId - The ID of the city to fetch forecast for
+     * @returns {Promise<Object>} The forecast weather data
+     * @throws {Error} If the API request fails
+     */
     async getForecast(cityId) {
       try {
-        const response = await fetch(
-          `${BASE_URL}/forecast?id=${cityId}&appid=${API_KEY}&units=${UNITS}`
-        );
+        const response = await fetch(`/api/cities/${cityId}/forecast`);
         if (!response.ok) throw new Error('Forecast data fetch failed');
         return await response.json();
       } catch (error) {
         console.error('Error fetching forecast:', error);
-        throw error;
+        throw new Error(`Forecast data fetch failed: ${error.message}`);
       }
     }
   };
